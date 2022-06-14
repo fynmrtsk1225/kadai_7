@@ -10,18 +10,30 @@
   </head>
 
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "#{key}") %>
-    <% end %>
+    <header>
+      <h1 class="headline">
+        <a> Picon </a>
+      </h1>
+      <% if logged_in? %>
+        <%= link_to 'New Picture', new_picture_path %>
+        <%= link_to "Profile", user_path(current_user.id) %>
+        <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Login", new_session_path %>
+      <% end %>
+    </header>
 
-    <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
+    <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
 
     <%= yield %>
+
+    <footer>
+      <p>~つぶやきを知ると世界が平和に~</p>
+      <p>© 2015-2018 Copyright ANYA SPY FAM Corp.</p>
+    </footer>
+
   </body>
 </html>

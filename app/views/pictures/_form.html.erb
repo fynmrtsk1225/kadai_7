@@ -18,9 +18,11 @@
 
   <div class="field">
     <%= form.label :image %>
-    <%= image_tag(picture.image.url) if picture.image && picture.image.url %>
+    <div class="return">
+      <%= image_tag(picture.image.url) if picture.image && picture.image.url %>
+    </div>
     <%= form.file_field :image %>
-    <%= form.hidden_field :image_cache %>
+    <%= form.hidden_field :image_cache %><br>
   </div>
 
   <div class="actions">

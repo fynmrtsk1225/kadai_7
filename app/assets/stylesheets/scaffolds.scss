@@ -38,14 +38,19 @@ div.actions {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
-  display: table; }
+  background-color: rgba(255, 0, 0, 0.181);
+  display: table; 
+  margin-right: auto;
+  margin-left: auto;
+}
 
 #error_explanation {
   width: 450px;
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
+  margin-right: auto;
+  margin-left: auto;
   background-color: #f0f0f0; }
 
 #error_explanation h2 {

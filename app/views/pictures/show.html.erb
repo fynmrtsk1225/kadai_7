@@ -5,10 +5,12 @@
   <%= @picture.content %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <%= image_tag @picture.image.url %>
-</p>
+<table class="show_image">
+  <tr>
+    <td><strong>Image:</strong></td>
+    <td><%= image_tag @picture.image.url, class:'show_image' %></td>
+  </tr>
+</table>
 
 <%= link_to 'Edit', edit_picture_path(@picture) %> |
 <%= link_to 'Back', pictures_path %>

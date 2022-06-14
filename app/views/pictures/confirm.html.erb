@@ -4,13 +4,18 @@
   <%= form.hidden_field :content %>
 
   <p>画像</p>
-  <%= image_tag(@picture.image.url) if @picture.image && @picture.image.url %>
+  <% image_tag(@picture.image.url) if @picture.image && @picture.image.url %>
+  <%= image_tag @picture.image.url, class:'show_image' %><br>
   <%= form.hidden_field :image_cache %>
-  <%= form.submit "投稿する" %>
+  <table>
+    <tr>
+      <td><%= form.submit "投稿する" %></td>
 <% end %>
 
 <%= form_with(model:@picture, url:new_picture_path, local:true, method:"get") do |form| %>
   <%= form.hidden_field :content %>
-  <%= form.hidden_field :image_cache %>
-  <%= form.submit "戻る", name: "back" %>
+  <%= form.hidden_field :image_cache, class:'return_image' %>
+  <td><%= form.submit "戻る", name: "back" %></td>
+  </tr>
+  </table>
 <% end %>
