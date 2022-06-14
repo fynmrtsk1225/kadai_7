@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>User</th>
       <th>Content</th>
       <th>Image</th>
       <th>Show</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @pictures.each do |picture| %>
       <tr>
+        <td><%= link_to "#{picture.user.name}", user_path(picture.user.id) %></td>
         <td><%= picture.content %></td>
         <td><%= picture.image %></td>
         <td><%= link_to 'Show', picture %></td>
