@@ -6,5 +6,8 @@ Rails.application.routes.draw do
     collection do
       post :confirm
     end
+    member do
+      patch :confirm  # confirm_pictures_pathの生成に必要
+    end
   end
 end

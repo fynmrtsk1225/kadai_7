@@ -1,5 +1,5 @@
 <h1>確認画面</h1>
-<%= form_with(model: @picture, url: pictures_path, local: true) do |form| %>
+<%= form_with(model:@picture, url:confirm_new_or_edit, method: confirm_form_method, local: true) do |form| %>
   <p>内容：<%= @picture.content %></p>
   <%= form.hidden_field :content %>
 
@@ -10,12 +10,7 @@
   <table>
     <tr>
       <td><%= form.submit "投稿する" %></td>
-<% end %>
-
-<%= form_with(model:@picture, url:new_picture_path, local:true, method:"get") do |form| %>
-  <%= form.hidden_field :content %>
-  <%= form.hidden_field :image_cache, class:'return_image' %>
-  <td><%= form.submit "戻る", name: "back" %></td>
-  </tr>
+      <td><%= form.submit "戻る", name: "back" %></td>
+    </tr>
   </table>
 <% end %>

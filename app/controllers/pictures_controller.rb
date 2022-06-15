@@ -3,7 +3,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures or /pictures.json
   def index
-    @pictures = Picture.all
+    @pictures = Picture.all.order("id DESC")
   end
 
   # GET /pictures/1 or /pictures/1.json
@@ -21,6 +21,7 @@ class PicturesController < ApplicationController
 
   def confirm
     @picture = current_user.pictures.build(picture_params)
+    @picture.id = params[:id]
     render :new if @picture.invalid?
   end
 
@@ -43,11 +44,11 @@ class PicturesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /pictures/1 or /pictures/1.json
+  # PATCH/PUT /pictures/1 or /pictures/1.json 
   def update
     respond_to do |format|
       if @picture.update(picture_params)
-        format.html { redirect_to picture_url(@picture), notice: "Picture was successfully updated." }
+        format.html { redirect_to picture_path(@picture), notice: "Picture was successfully updated." }
         format.json { render :show, status: :ok, location: @picture }
       else
         format.html { render :edit, status: :unprocessable_entity }
