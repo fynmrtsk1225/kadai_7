@@ -27,6 +27,7 @@ class PicturesController < ApplicationController
 
   # GET /pictures/1/edit
   def edit
+    @picture.image.cache! unless @picture.image.blank?
   end
 
   # POST /pictures or /pictures.json
@@ -44,15 +45,19 @@ class PicturesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /pictures/1 or /pictures/1.json 
+  # PATCH/PUT /pictures/1 or /pictures/1.json
   def update
-    respond_to do |format|
-      if @picture.update(picture_params)
-        format.html { redirect_to picture_path(@picture), notice: "Picture was successfully updated." }
-        format.json { render :show, status: :ok, location: @picture }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @picture.errors, status: :unprocessable_entity }
+    if params[:back]
+      render :edit
+    else
+      respond_to do |format|
+        if @picture.update(picture_params)
+          format.html { redirect_to picture_path(@picture), notice: "Picture was successfully updated." }
+          format.json { render :show, status: :ok, location: @picture }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @picture.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -68,13 +73,14 @@ class PicturesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_picture
-      @picture = Picture.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def picture_params
-      params.require(:picture).permit(:content,  :image, :image_cache)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_picture
+    @picture = Picture.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def picture_params
+    params.require(:picture).permit(:content, :image, :image_cache)
+  end
 end
